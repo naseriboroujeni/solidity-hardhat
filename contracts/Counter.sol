@@ -35,8 +35,6 @@ contract Counter is BaseContract {
         return count;
     }
 
-    
-
     function sumOfArray(uint8[] calldata array) public pure returns (uint8) {
         uint8 sum = 0;
         for (uint8 i = 0; i < array.length; i++) {
