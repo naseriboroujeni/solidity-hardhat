@@ -1,9 +1,10 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.24;
 
-contract Counter {
+import {BaseContract} from "./BaseContract.sol";
+
+contract Counter is BaseContract {
     uint8 private count;
-    string public name;
 
     enum CountChage {
         INCREASED,
@@ -11,11 +12,9 @@ contract Counter {
     }
 
     event CountChanged(uint8 oldCount, uint8 newCount, CountChage change);
-    event NameChanged(string oldName, string newName);
 
-    constructor(uint8 _initialCount, string memory _name) {
+    constructor(uint8 _initialCount, string memory _name) BaseContract(_name) {
         count = _initialCount;
-        name = _name;
     }
 
     function increaseCount() public returns (uint8) {
@@ -36,12 +35,7 @@ contract Counter {
         return count;
     }
 
-    function setName(string calldata _newName) public returns (string memory) {
-        string memory oldName = name;
-        name = _newName;
-        emit NameChanged(oldName, name);
-        return name;
-    }
+    
 
     function sumOfArray(uint8[] calldata array) public pure returns (uint8) {
         uint8 sum = 0;
