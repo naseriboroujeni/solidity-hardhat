@@ -5,17 +5,30 @@ contract Counter {
     uint8 private count;
     string public name;
 
+    enum CountChage {
+        INCREASED,
+        DECREASED
+    }
+
+    event CountChanged(uint8 oldCount, uint8 newCount, CountChage change);
+
     constructor(uint8 _initialCount, string memory _name) {
         count = _initialCount;
         name = _name;
     }
 
     function increaseCount() public returns (uint8) {
-        return ++count;
+        uint8 oldCount = count;
+        count++;
+        emit CountChanged(oldCount, count, CountChage.INCREASED);
+        return count;
     }
 
     function decreaseCount() public returns (uint8) {
-        return count--;
+        uint8 oldCount = count;
+        count--;
+        emit CountChanged(oldCount, count, CountChage.DECREASED);
+        return count;
     }
 
     function getCount() public view returns (uint8) {
