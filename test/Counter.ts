@@ -6,10 +6,10 @@ describe("Counter", function () {
 
    async function deployCounter() {
 
-      const Lock = await ethers.getContractFactory("Counter");
-      const lock = await Lock.deploy(144, "My Counter");
+      const Counter = await ethers.getContractFactory("Counter");
+      const counter = await Counter.deploy(144, "My Counter");
 
-      return lock;
+      return counter;
    }
 
    describe("Deployment", function () {
