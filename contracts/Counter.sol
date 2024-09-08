@@ -11,6 +11,7 @@ contract Counter {
     }
 
     event CountChanged(uint8 oldCount, uint8 newCount, CountChage change);
+    event NameChanged(string oldName, string newName);
 
     constructor(uint8 _initialCount, string memory _name) {
         count = _initialCount;
@@ -36,7 +37,9 @@ contract Counter {
     }
 
     function setName(string calldata _newName) public returns (string memory) {
+        string memory oldName = name;
         name = _newName;
+        emit NameChanged(oldName, name);
         return name;
     }
 
